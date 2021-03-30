@@ -3,8 +3,8 @@ import {useInterval} from "./utils";
 import "./SnakeBoard.css";
 
 const SnakeBoard = () => {
-  const height = 10;
-  const width = 10;
+  const height = 30;
+  const width = 30;
   var initialRows = [];
   for (var i = 0; i < height; i++) {
     initialRows[i] = [];
@@ -13,9 +13,22 @@ const SnakeBoard = () => {
     }
   }
 
+  const randomPosition = () => {
+    const position = {
+      x: Math.floor(Math.random() * width),
+      y: Math.floor(Math.random() * height)
+    };
+    return position;
+  };
+
   const [rows, setRows] = useState(initialRows);
   const [snake, setSnake] = useState([{x: 0, y: 0}]);
   const [direction, setDirection] = useState("right");
+  const [food, setFood] = useState(randomPosition);
+  const [intervalId, setIntervalId] = useState();
+  const [isGameOver, setIsGameOver] = useState(false);
+
+
 
 const changeDirectionWithKeys = (e) => {
   const {keyCode} = e;
@@ -51,8 +64,16 @@ document.addEventListener("keydown", changeDirectionWithKeys);
     snake.forEach(tile => {
       newRows[tile.x][tile.y] = "snake";
     });
+    newRows[food.x][food.y] = "food";
     setRows(newRows);
   };
+
+const checkGameOver = () => {
+  const head = snake[0];
+  const body = snake.slice(1, -1);
+  return body.find(b => b.x === head.x && b.y === head.y);
+}
+
 
   const moveSnake = () => {
     const newSnake = [];
@@ -72,13 +93,40 @@ document.addEventListener("keydown", changeDirectionWithKeys);
       default:
         break;
     }
+
+if (checkGameOver()) {
+  setIsGameOver(true);
+  clearInterval(intervalId);
+}
+
+
+
+
+        // Lisätään madolle joka askeleella uusi pala,
+        // joka poistetaan jos mato ei saa tällä askeleella ruokaa
+        snake.forEach(tile => {
+          newSnake.push(tile);
+        });
+        // Tarkistetaan saako mato ruuan kiinni
+        const madonPaa = snake[0];
+        if (madonPaa.x === food.x && madonPaa.y === food.y) {
+          setFood(randomPosition);
+        } else {
+          newSnake.pop();
+        }
+
     setSnake(newSnake);
     displaySnake();
   };
 
-  useInterval(moveSnake, 250);
+  useInterval(moveSnake, 150, setIntervalId);
 
-  return <div className="Snake-board">{displayRows}</div>;
+  return(
+  <div className="Snake-board">
+    {displayRows}
+    {isGameOver && <div className="Game-over">Game over!</div>}
+  </div>
+      );
 };
 
 export default SnakeBoard;

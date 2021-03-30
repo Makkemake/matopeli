@@ -1,4 +1,5 @@
 .Snake-board {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,10 +12,19 @@
   flex-direction: row;
 }
 
+.Game-over {
+  position: absolute;
+  font-family: 'Gorditas', cursive;
+  font-size: 50px;
+  color: red;
+  font-weight: bold;
+  padding: 10px;
+}
+
 .tile {
-  width: 25px;
-  height: 25px;
-  border: 1px solid olive;
+  position: relative;
+  width: 10px;
+  height: 10px;
 }
 
 .blank {
@@ -23,4 +33,17 @@
 
 .snake {
   background: green;
+}
+
+.food {
+  background: white;
+  /* background: #F5CBA7; */
+}
+
+.food:after {
+  position: absolute;
+  content: "🍔";
+  font-size: 10px;
+  top: -4px;
+  left: 0;
 }
