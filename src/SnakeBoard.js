@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useInterval} from "./utils";
 import "./SnakeBoard.css";
 
-const SnakeBoard = () => {
+const SnakeBoard = ({points, setPoints}) => {
   const height = 30;
   const width = 30;
   var initialRows = [];
@@ -93,10 +93,12 @@ const checkGameOver = () => {
       default:
         break;
     }
-
 if (checkGameOver()) {
   setIsGameOver(true);
   clearInterval(intervalId);
+  const pointsList = JSON.parse(localStorage.getItem("snake-points")) || [];
+    pointsList.push(points);
+    localStorage.setItem("snake-points", JSON.stringify(pointsList));
 }
 
 
@@ -111,6 +113,7 @@ if (checkGameOver()) {
         const madonPaa = snake[0];
         if (madonPaa.x === food.x && madonPaa.y === food.y) {
           setFood(randomPosition);
+          setPoints(points + 1);
         } else {
           newSnake.pop();
         }

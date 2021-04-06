@@ -19,3 +19,13 @@
   color: #CBF7ED;
   min-width: 100%;
 }
+
+button {
+  color: #137547;
+  background-color: #CEFF1A;
+  padding: 10px;
+  border-radius: 20px;
+  border: 0;
+  text-transform: uppercase;
+  font-weight: bold;
+}
