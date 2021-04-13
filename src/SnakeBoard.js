@@ -99,6 +99,7 @@ if (checkGameOver()) {
   const pointsList = JSON.parse(localStorage.getItem("snake-points")) || [];
     pointsList.push(points);
     localStorage.setItem("snake-points", JSON.stringify(pointsList));
+    window.disparchEvent(new Event("storage"));
 }
 
 
