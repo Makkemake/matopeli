@@ -18,9 +18,12 @@ const sortedPointsList = pointsList.sort((a,b) => b - a);
       <div className="LeaderBoard-header">Top 5</div>
       <div className="LeaderBoard-points">pisteet</div>
       { pointsList
+        .sort((a, b) => b.points - a.points)
         .slice(0, 5)
         .map((points, i) => (
-        <div key ={`${points}-${i}`}>{points} pistettä </div>
+        <div key ={`${points.points}-${i}`}>
+          {points.nake} {points.points}
+        </div>
       ))}
     </div>
   );
