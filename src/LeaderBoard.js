@@ -22,7 +22,7 @@ const sortedPointsList = pointsList.sort((a,b) => b - a);
         .slice(0, 5)
         .map((points, i) => (
         <div key ={`${points.points}-${i}`}>
-          {points.nake} {points.points}
+          {points.name} {points.points}
         </div>
       ))}
     </div>

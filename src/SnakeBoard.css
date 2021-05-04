@@ -47,3 +47,7 @@
   top: -4px;
   left: 0;
 }
+
+.obstacle {
+  background: black;
+}

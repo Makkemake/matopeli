@@ -24,3 +24,11 @@ export const useInterval = (callback, delay, setIntervalId) => {
     }
   }, [delay, setIntervalId]);
 };
+
+
+
+
+
+
+
+export const range = (number) => [...Array(Math.round(number)).keys()]

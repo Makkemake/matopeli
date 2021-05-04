@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useInterval} from "./utils";
+import {useInterval, range} from "./utils";
 import "./SnakeBoard.css";
 
 const SnakeBoard = ({points, setPoints}) => {
@@ -13,21 +13,52 @@ const SnakeBoard = ({points, setPoints}) => {
     }
   }
 
+const obstacles = [
+  {name: 'tyhjä', location: []},
+  {
+    name: 'keski',
+    location: range(width * 0.60).map(
+      (y) => ({x: Math.round(height/2), y: y+Math.ceil(width*0.2)})
+    )
+  },
+  {
+  name: 'reunat',
+    location: [
+      ...range(width).map(x => ({x, y: 0})),
+      ...range(width).map(x => ({x, y: width - 1})),
+      ...range(height).map(y => ({x: 0, y})),
+      ...range(height).map(y => ({x: height - 1, y}))
+    ]
+  },
+  {
+    name: "oma",
+    location: []
+  }
+];
+
+
+const randomObstacle = () =>
+  obstacles[Math.floor(Math.random() * obstacles.length)];
+
+
   const randomPosition = () => {
     const position = {
       x: Math.floor(Math.random() * width),
       y: Math.floor(Math.random() * height)
     };
+    if (obstacle.location.some(({x,y}) => position.x === x && position.y === y)) {
+      return randomPosition()
+    }
     return position;
   };
 
+  const [obstacle] = useState(randomObstacle())
   const [rows, setRows] = useState(initialRows);
-  const [snake, setSnake] = useState([{x: 0, y: 0}]);
+  const [snake, setSnake] = useState([{x: 1, y: 1}]);
   const [direction, setDirection] = useState("right");
   const [food, setFood] = useState(randomPosition);
   const [intervalId, setIntervalId] = useState();
   const [isGameOver, setIsGameOver] = useState(false);
-
 
 
 const changeDirectionWithKeys = (e) => {
@@ -65,14 +96,17 @@ document.addEventListener("keydown", changeDirectionWithKeys);
       newRows[tile.x][tile.y] = "snake";
     });
     newRows[food.x][food.y] = "food";
+    obstacle.location.forEach(tile => {newRows[tile.x][tile.y] = 'obstacle'})
     setRows(newRows);
   };
 
 const checkGameOver = () => {
   const head = snake[0];
   const body = snake.slice(1, -1);
-  return body.find(b => b.x === head.x && b.y === head.y);
-}
+  const hitSnake = body.find(b => b.x === head.x && b.y === head.y);
+  const hitWall = obstacle.location.some(({x,y}) => head.x === x && head.y === y)
+  return hitSnake || hitWall;
+};
 
 
   const moveSnake = () => {
@@ -97,9 +131,10 @@ if (checkGameOver()) {
   setIsGameOver(true);
   clearInterval(intervalId);
   const pointsList = JSON.parse(localStorage.getItem("snake-points")) || [];
-    pointsList.push({name: "Markus", points});
+  const name = prompt('Peli päättyi! Anna nimimerkkisi:');
+    pointsList.push({name, points});
     localStorage.setItem("snake-points", JSON.stringify(pointsList));
-    window.disparchEvent(new Event("storage"));
+    window.dispatchEvent(new Event("storage"));
 }
 
 
