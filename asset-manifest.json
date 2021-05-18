@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/matopeli/static/css/main.982f7403.chunk.css",
-    "main.js": "/matopeli/static/js/main.49589dc4.chunk.js",
-    "main.js.map": "/matopeli/static/js/main.49589dc4.chunk.js.map",
+    "main.css": "/matopeli/static/css/main.26f04886.chunk.css",
+    "main.js": "/matopeli/static/js/main.27415d34.chunk.js",
+    "main.js.map": "/matopeli/static/js/main.27415d34.chunk.js.map",
     "runtime-main.js": "/matopeli/static/js/runtime-main.9e4145e5.js",
     "runtime-main.js.map": "/matopeli/static/js/runtime-main.9e4145e5.js.map",
-    "static/js/2.e598a569.chunk.js": "/matopeli/static/js/2.e598a569.chunk.js",
-    "static/js/2.e598a569.chunk.js.map": "/matopeli/static/js/2.e598a569.chunk.js.map",
+    "static/js/2.a00a5140.chunk.js": "/matopeli/static/js/2.a00a5140.chunk.js",
+    "static/js/2.a00a5140.chunk.js.map": "/matopeli/static/js/2.a00a5140.chunk.js.map",
     "index.html": "/matopeli/index.html",
-    "static/css/main.982f7403.chunk.css.map": "/matopeli/static/css/main.982f7403.chunk.css.map",
-    "static/js/2.e598a569.chunk.js.LICENSE.txt": "/matopeli/static/js/2.e598a569.chunk.js.LICENSE.txt"
+    "static/css/main.26f04886.chunk.css.map": "/matopeli/static/css/main.26f04886.chunk.css.map",
+    "static/js/2.a00a5140.chunk.js.LICENSE.txt": "/matopeli/static/js/2.a00a5140.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9e4145e5.js",
-    "static/js/2.e598a569.chunk.js",
-    "static/css/main.982f7403.chunk.css",
-    "static/js/main.49589dc4.chunk.js"
+    "static/js/2.a00a5140.chunk.js",
+    "static/css/main.26f04886.chunk.css",
+    "static/js/main.27415d34.chunk.js"
   ]
 }
